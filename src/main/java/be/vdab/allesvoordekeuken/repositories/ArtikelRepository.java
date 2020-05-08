@@ -11,6 +11,6 @@ public interface ArtikelRepository {
     Optional<Artikel> findById(long id);
     void create(Artikel artikel);
     void delete(long id);
-    List<Artikel> findAllByWord(String woord);
+    List<Artikel> findBijNaamContains(String woord);
     int algemeneVerhoging(BigDecimal percentage);
 }

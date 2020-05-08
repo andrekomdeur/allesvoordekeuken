@@ -3,7 +3,7 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
 http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd" version="2.1">
-    <named-query name='Artikel.findAllByWord'>
+    <named-query name='Artikel.findBijNaamContains'>
         <query>
             select o from Artikel o where o.naam like :deel order by o.naam
         </query>

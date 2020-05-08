@@ -98,14 +98,15 @@ class JpaArtikelRepositoryTest
     }
 
     @Test
-    void findAllByWord() {
-        List<Artikel> docenten = repository.findAllByWord("test");
-        assertThat(docenten)
+    void findBijNaamContains() {
+        List<Artikel> artikels = repository.findBijNaamContains("es");
+        manager.clear();
+        assertThat(artikels)
                 .hasSize(super.jdbcTemplate.queryForObject(
-                        "select count(*) from artikels where naam like '%test%'", Integer.class))
+                        "select count(*) from artikels where naam like '%es%'", Integer.class))
                 .extracting(artikel -> artikel.getNaam().toLowerCase())
-                .allSatisfy(naam -> assertThat(naam).contains("test"))
-                .isSorted();
+                .allSatisfy(artikel -> assertThat(artikel).contains("es")).isSorted();
+        assertThat(artikels).extracting(artikel->artikel.getArtikelGroep().getNaam());
     }
     @Test
     void algemeneVerhoging() {

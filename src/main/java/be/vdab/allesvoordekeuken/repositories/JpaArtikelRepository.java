@@ -33,9 +33,11 @@ class JpaArtikelRepository implements ArtikelRepository {
     }
 
     @Override
-    public List<Artikel> findAllByWord(String woord) {
-        return manager.createNamedQuery("Artikel.findAllByWord", Artikel.class)
+    public List<Artikel> findBijNaamContains(String woord) {
+        return manager.createNamedQuery("Artikel.findBijNaamContains", Artikel.class)
                 .setParameter("deel", '%' + woord + '%')
+                .setHint("javax.persistence.loadgraph",
+                        manager.createEntityGraph(Artikel.MET_ARTIKELGROEP))
                 .getResultList();
     }
 
